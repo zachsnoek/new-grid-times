@@ -9,62 +9,138 @@ import Logo from '../Logo';
 import Button from '../Button';
 
 const Header = () => {
-  return (
-    <header>
-      <SuperHeader>
-        <Row>
-          <ActionGroup>
-            <button>
-              <Search size={24} />
-            </button>
-            <button>
-              <Menu size={24} />
-            </button>
-          </ActionGroup>
-          <ActionGroup>
-            <button>
-              <User size={24} />
-            </button>
-          </ActionGroup>
-        </Row>
-      </SuperHeader>
-      <MainHeader>
-        <Logo />
-      </MainHeader>
-    </header>
-  );
+    return (
+        <header>
+            <SuperHeader>
+                <Row>
+                    <ActionGroup>
+                        <button>
+                            <Search size={24} />
+                        </button>
+                        <button>
+                            <Menu size={24} />
+                        </button>
+                    </ActionGroup>
+                    <ActionGroup>
+                        <button>
+                            <User size={24} />
+                        </button>
+                    </ActionGroup>
+                </Row>
+            </SuperHeader>
+            <MainHeader>
+                <DesktopActionGroup>
+                    <button>
+                        <Search size={24} />
+                    </button>
+                    <button>
+                        <Menu size={24} />
+                    </button>
+                </DesktopActionGroup>
+                <Logo />
+                <SubscribeWrapper>
+                    <Button>Subscribe</Button>
+                    <SubLink href="/">Already a subscriber?</SubLink>
+                </SubscribeWrapper>
+            </MainHeader>
+        </header>
+    );
 };
 
 const SuperHeader = styled.div`
-  padding: 16px 0;
-  background: var(--color-gray-900);
-  color: white;
+    padding: 16px 0;
+    background: var(--color-gray-900);
+    color: white;
+
+    @media ${QUERIES.desktopAndUp} {
+        display: none;
+    }
 `;
 
 const Row = styled(MaxWidthWrapper)`
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 `;
 
 const ActionGroup = styled.div`
-  display: flex;
-  gap: 24px;
+    display: flex;
+    gap: 24px;
 
-  /*
+    /*
     FIX: Remove the inline spacing that comes with
     react-feather icons.
   */
-  svg {
-    display: block;
-  }
+    svg {
+        display: block;
+    }
 `;
 
 const MainHeader = styled(MaxWidthWrapper)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 32px;
-  margin-bottom: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 32px;
+    margin-bottom: 48px;
+
+    @media ${QUERIES.tabletAndUp} {
+        margin-top: 48px;
+        margin-bottom: 72px;
+    }
+
+    @media ${QUERIES.laptopAndUp} {
+        justify-content: revert;
+
+        display: grid;
+        // auto makes the logo its natural, intrinsic size
+        // 1fr makes the other columns take up the remaining space, forcing
+        // the logo to the center
+        grid-template-columns: 1fr auto 1fr;
+
+        align-items: center; // move the subscribe text within its column, not the column group (align-content)
+        justify-items: start;
+
+        margin-top: 16px;
+        margin-bottom: 72px;
+    }
+`;
+
+const SubscribeWrapper = styled.div`
+    display: none;
+
+    @media ${QUERIES.laptopAndUp} {
+        justify-self: end;
+
+        // the 'close enough' way
+        /* align-self: end; */
+        /* display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px; */
+
+        // the accurate way
+        position: relative;
+        display: revert;
+    }
+`;
+
+const SubLink = styled.a`
+    font-size: 0.875rem;
+    color: var(--color-gray-900);
+    font-style: italic;
+    text-decoration: underline;
+
+    position: absolute; // take it out of Flow
+    width: 100%;
+    text-align: center;
+    margin-top: 8px;
+`;
+
+const DesktopActionGroup = styled(ActionGroup)`
+    display: none;
+
+    @media ${QUERIES.laptopAndUp} {
+        display: flex;
+    }
 `;
 
 export default Header;
