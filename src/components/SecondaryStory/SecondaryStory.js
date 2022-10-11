@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 
-const SecondaryStory = ({ id, title, image, location, abstract }) => {
+const SecondaryStory = ({ id, title, image, location, abstract, index }) => {
   return (
     <a href={`/story/${id}`}>
-      <Wrapper>
+      <Wrapper index={index}>
         <Image alt={image.alt} src={image.src} />
         <Heading>{title}</Heading>
         <Abstract>{abstract}</Abstract>
@@ -16,11 +16,14 @@ const SecondaryStory = ({ id, title, image, location, abstract }) => {
 const Wrapper = styled.article`
   display: grid;
   grid-template-areas:
-    'image heading'
-    'image abstract';
+  'image heading'
+  'image abstract';
   gap: 4px 16px;
   grid-template-columns: 120px 1fr;
-  color: var(--color-gray-900);
+
+  border-top: ${p => p.index !== 0 ? '1px solid var(--color-gray-300)' : ''};
+  padding-top: 16px;
+  padding-bottom: 16px;
 `;
 
 const Image = styled.img`

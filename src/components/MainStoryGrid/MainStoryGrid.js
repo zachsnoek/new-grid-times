@@ -23,7 +23,7 @@ const MainStoryGrid = () => {
       <SecondaryStorySection>
         <StoryList>
           {SECONDARY_STORIES.map((story, index) => (
-            <SecondaryStory key={story.id} {...story} />
+            <SecondaryStory key={story.id} {...story} index={index} />
           ))}
         </StoryList>
       </SecondaryStorySection>
