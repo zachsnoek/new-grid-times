@@ -145,6 +145,16 @@ const TopRow = styled.div`
     font-size: 0.875rem;
     border-bottom: 1px solid var(--color-gray-700);
     padding: 24px 0;
+
+    @media ${QUERIES.tabletAndUp} {
+        flex-direction: row;
+        justify-content: center;
+        gap: 48px;
+    }
+
+    @media ${QUERIES.laptopAndUp} {
+        justify-content: flex-end;
+    }
 `;
 
 const Social = styled.div`
