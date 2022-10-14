@@ -181,6 +181,16 @@ const MainNavArea = styled.div`
     gap: 32px;
     padding: 32px 0 48px;
     text-align: center;
+
+    @media ${QUERIES.tabletAndUp} {
+        text-align: left;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+
+    @media ${QUERIES.laptopAndUp} {
+        grid-template-columns: repeat(4, 1fr);
+    }
 `;
 
 const MainNavHeading = styled.h2`
